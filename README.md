@@ -33,6 +33,6 @@ scrape_configs:
 npm run start:service debug
 
 ```
-- Start prometheus , in  `http://localhost:9090`  excute `voltage_gauge` 
+- Start prometheus , in  `http://localhost:9090`  execute `voltage_gauge` 
 
 
