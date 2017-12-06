@@ -1,4 +1,4 @@
-# Démo exposing metrics to ptometheus with node.js lib
+# Démo exposing metrics to Prometheus with prom-client
 
 ### Usage
 - Install Prometheus and change the config file `prometheus.yml` to this 
