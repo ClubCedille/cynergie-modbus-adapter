@@ -1,0 +1,46 @@
+{
+  "name": "modbusexport",
+  "version": "1.0.0",
+  "description": "Reading registers from modbus at interval and storing them every specified occurence",
+  "main": "build/index.js",
+  "scripts": {
+    "install": "tsc",
+    "start": "npm-run-all --parallel start:*",
+    "start:web": "http-server reports",
+    "start:service": "node build/index.js",
+    "extract": "node build/extract.js",
+    "test": "npm run test:lint && npm run test:code",
+    "test:lint": "tslint src/**/*.ts test/**/*.ts || true",
+    "test:code": "mocha -r ts-node/register test/**/*.ts"
+  },
+  "keywords": [
+    "modbus",
+    "reading",
+    "interval",
+    "database",
+    "csv",
+    "storage",
+    "service"
+  ],
+  "author": "Gautier Colajanni",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "http-server": "^0.10.0",
+    "modbus-serial": "^5.2.9",
+    "node-schedule": "^1.2.1",
+    "npm-run-all": "^4.0.2",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/express": "^4.0.39",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.18",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.2"
+  }
+}
