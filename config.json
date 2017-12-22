@@ -1,0 +1,21 @@
+{
+	"inMemoryDB": false,
+	"interventionTime": "30 0 * * *",
+	"readFrequency": {
+		"interval": 60000,
+		"requiredOccurences": 5,
+		"scheduled": false
+	},
+	"controllers": [
+		{
+			"name": "DEMO",
+			"address": "127.0.0.1",
+			"port": "502",
+			"slaveId": 1,
+			"registers": [
+				{"label": "Ia", "address": 154, "type": "INT16", "unit": "A", "coefficient": 1.0},
+				{"label": "Ia", "address": 155, "type": "INT16", "unit": "A", "coefficient": 1.0}
+			]
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+  "globalDependencies": {
+    "node-schedule": "registry:dt/node-schedule#1.1.0+20161119044246",
+    "sqlite3": "registry:dt/sqlite3#2.2.3+20160724070935"
+  },
+  "dependencies": {
+    "modbus-serial": "github:yaacov/node-modbus-serial/index.d.ts#047acc7e6edbd95c60c7b7c1b40297e19b6e2644"
+  }
+}
