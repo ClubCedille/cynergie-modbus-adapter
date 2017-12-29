@@ -13,10 +13,10 @@ const config = require('../config.json') as Configuration;
 const express = require('express');
 const cluster = require('cluster');
 const server = express();
-const register = require('../prom-client').register;
+const register = require('../node_modules/prom-client').register;
 
 //creating gauge pour prometheus metric
-const Gauge = require('../prom-client').Gauge;
+const Gauge = require('../node_modules/prom-client').Gauge;
 const g = new Gauge({
 	name: 'voltage_gauge',
 	help: 'Exemple voltage gauge',
@@ -63,10 +63,6 @@ const controllerFetching = controllers.map(c => {
 });
 
 
-// Initializing buffer
-const buffer = [];
-controllerFetching.forEach((v, i) => buffer[i] = []);
-
 // At each call, we will run the controller fetching operation and save it to DB every required interval
 const fetchFunction = () => {
 	// For each controller, store dataset obtained into a buffer
@@ -74,14 +70,9 @@ const fetchFunction = () => {
 	controllerFetching.forEach((fetch, index) => {
 		fetch()
 			.then(dataset => {
-				buffer[index] = [dataset, ...buffer[index]];
-				if (buffer[index].length % config.readFrequency.requiredOccurences === 0) {
-					const summarizedData = DatasetHelper.summarize(buffer[index]);
-
-					// Previously storage
-
-					buffer[index] = [];
-				}
+					dataset.data.forEach(d => {
+						g.set({ unit: d.unit, Batiment: d.label }, d.data);
+					});
 			})
 			.catch(reason => console.error(reason));
 	});
@@ -97,17 +88,6 @@ else {
 }
 
 
-setInterval(() => {
-	g.set({ unit: 'Volt', Batiment: 'A' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'b' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'c' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'd' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'e' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'f' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'o' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'r' },Math.random() );
-	g.set({ unit: 'Volt', Batiment: 'n' },Math.random() );
-}, 100);
 
 //expose metrics
 server.get('/metrics', (req, res) => {

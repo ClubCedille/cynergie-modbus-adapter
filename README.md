@@ -14,7 +14,6 @@ scrape_configs:
       - targets: ['localhost:3000']
 
   ```
- - Clone the node.js client lib [nprom-client ](https://github.com/siimon/prom-client)
   
  - Install Modules 
  

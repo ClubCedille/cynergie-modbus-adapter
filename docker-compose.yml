@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+networks:
+  default:
+    external:
+      name: host
+
