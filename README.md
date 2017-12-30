@@ -32,8 +32,9 @@ scrape_configs:
 npm run start:service debug
 
 ```
-- Start prometheus , in  `http://localhost:9090`  execute `voltage_gauge` 
+- Start prometheus with  `docker-compose up`
 
 ### Source
 - https://github.com/gcolajan/modbus-reading
 - https://github.com/siimon/prom-client
+- https://github.com/vegasbrianc/prometheus
