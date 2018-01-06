@@ -30,7 +30,8 @@
     "modbus-serial": "^5.2.9",
     "node-schedule": "^1.2.1",
     "npm-run-all": "^4.0.2",
-    "sqlite3": "^3.1.8"
+    "sqlite3": "^3.1.8",
+    "prom-client":"^10.2.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
