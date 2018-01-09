@@ -1,8 +1,8 @@
 # Démo exposing metrics to Prometheus with prom-client
 
 ### Usage
-- Need docker and docker-compose to work
-- Start prometheus with  `docker-compose up`
+- need docker and docker-compose to work
+- ntart prometheus with  `docker-compose up`
 - the metrics are in http://localhost:3002/metrics
 - prometheus is in http://localhost:9090
 - open grafana is in http://localhost:3000 
