@@ -2,7 +2,7 @@
 
 ### Usage
 - need docker and docker-compose to work
-- ntart prometheus with  `docker-compose up`
+- start prometheus with  `docker-compose up`
 - the metrics are in http://localhost:3002/metrics
 - prometheus is in http://localhost:9090
 - open grafana is in http://localhost:3000 
