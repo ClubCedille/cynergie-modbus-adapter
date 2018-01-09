@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3'
 
 volumes:
     prometheus_data: {}
@@ -6,8 +6,9 @@ volumes:
 
 services:
 
+  #TSDB
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.0.0
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -18,9 +19,28 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - 9090:9090
-    network_mode: "host"
+
+    depends_on:
+      - adapteur 
     restart: always
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == ${HOSTNAME}
+    network_mode: "host"
+
+  #modbus-adapteur app 
+  adapteur:
+    build: .
+    ports:
+      - 3002:3002
+    network_mode: "host"
+
+  #used to show graphics
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env_file:
+      - config.monitoring
+    network_mode: "host"
