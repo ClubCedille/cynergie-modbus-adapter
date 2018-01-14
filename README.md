@@ -2,10 +2,11 @@
 
 ### Usage
 - need docker and docker-compose to work
-- start prometheus with  `docker-compose up`
+- change path for dashboards in `grafana/grafana.ini`
+- start   with  `docker-compose up`
 - the metrics are in http://localhost:3002/metrics
 - prometheus is in http://localhost:9090
-- open grafana is in http://localhost:3000 
+- grafana is open  in http://localhost:3000 
   - user: ` admin` 
   - password: ` cynergie` 
 ### Source

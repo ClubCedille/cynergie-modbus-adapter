@@ -1,8 +1,12 @@
 version: '3'
 
+
 volumes:
     prometheus_data: {}
     grafana_data: {}
+
+
+
 
 services:
 
@@ -28,6 +32,7 @@ services:
   #modbus-adapteur app 
   adapteur:
     build: .
+    image: cynergie-adapter
     ports:
       - 3002:3002
     network_mode: "host"
@@ -41,6 +46,11 @@ services:
       - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     env_file:
       - config.monitoring
+    command:
+      - '--config=/etc/grafana/grafana.ini'
     network_mode: "host"
+
+
