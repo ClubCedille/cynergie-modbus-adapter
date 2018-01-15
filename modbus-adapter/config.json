@@ -3,8 +3,8 @@
 	"interventionTime": "30 0 * * *",
 	"readFrequency": {
 		"interval": 15000,
-		"requiredOccurences": 5,
-		"scheduled": false
+		"requiredOccurences": 1,
+		"scheduled": "/5 * * * *"
 	},
 	"controllers": [
 		{

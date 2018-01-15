@@ -23,8 +23,16 @@ const g = new Gauge({
 	labelNames: ['unit', 'Batiment']
 });
 
-
 const controllers = createControllers(config.controllers);
+for (const c of controllers) {
+	for (const r of c.registers) {
+		r["gauge"] = new Gauge({
+			name: c.name + "_" + r.label,
+			help: 'Exemple voltage gauge', // todo
+			labelNames: ['unit', 'Batiment']
+		});
+	}
+}
 
 
 const args = process.argv.slice(2);
@@ -45,7 +53,9 @@ const controllerFetching = controllers.map(c => {
 		promise = promise.then(() => []);
 
 		c.readings.forEach(r => {
-			promise = promise.then((v: any[]) => provider.read(r.address, r.nbRegisters).then(raw => { v.push(r.recompose(raw.buffer)); return v; }));
+			promise = promise
+				.then((v: any[]) => provider.read(r.address, r.nbRegisters)
+				.then(raw => { v.push(r.recompose(raw.buffer)); return v; }));
 		});
 
 		promise = promise.catch(err => console.error('Error encountered with controller fetching:', err));
@@ -54,7 +64,8 @@ const controllerFetching = controllers.map(c => {
 			return {
 				time: date,
 				name: c.name,
-				data: DatasetHelper.flatten(values)
+				data: DatasetHelper.flatten(values),
+				controller: c
 			}
 		});
 
@@ -71,7 +82,8 @@ const fetchFunction = () => {
 		fetch()
 			.then(dataset => {
 					dataset.data.forEach(d => {
-						g.set({ unit: d.unit, Batiment: d.label }, d.data);
+						const r = d.register;
+						r.gauge.set({ unit: r.unit, Batiment: r.label }, d.data);
 					});
 			})
 			.catch(reason => console.error(reason));

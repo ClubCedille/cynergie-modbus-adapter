@@ -10,6 +10,7 @@ export interface RegisterConfiguration {
 	type: SupportedType;
 	unit: string;
 	coefficient: number;
+	gauge: any; // TODO as Gauge
 }
 
 export class Register {
