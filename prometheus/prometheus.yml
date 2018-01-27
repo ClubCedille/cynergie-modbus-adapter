@@ -1,7 +1,7 @@
-# my global config
-global:
-  scrape_interval:     10s # By default, scrape targets every 10 seconds.
-  
+#my global config
+#global:
+  #scrape_interval:     10s # By default, scrape targets every 10 seconds.
+
 
 
 
@@ -12,13 +12,10 @@ scrape_configs:
 
   - job_name: 'cynergie'
 
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 10s
+    # Override the global default and scrape targets from this job every 8s seconds.
+    scrape_interval: 8s
 
     static_configs:
-         - targets: ['localhost:3000']
-
-
-   
+         - targets: ['localhost:3002']
 
 

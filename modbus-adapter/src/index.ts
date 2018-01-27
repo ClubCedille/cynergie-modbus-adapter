@@ -95,5 +95,5 @@ server.get('/metrics', (req, res) => {
 	res.end(register.metrics());
 });
 
-console.log('Server listening to 3000, metrics exposed on /metrics endpoint');
-server.listen(3000);
+console.log('Server listening to 3002, metrics exposed on /metrics endpoint');
+server.listen(3002);
