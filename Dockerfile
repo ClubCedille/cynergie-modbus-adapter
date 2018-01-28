@@ -7,6 +7,6 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
 RUN apt-get install -y gnupg
 RUN bash nodesource_setup.sh
 RUN apt-get install -y nodejs 
-RUN cd adapteur && npm install && ./node_modules/.bin/tsc 
-CMD cd adapteur && npm run start:service debug
+RUN cd adapteur && npm install && npm run build
+CMD cd adapteur && npm run start:service 
  

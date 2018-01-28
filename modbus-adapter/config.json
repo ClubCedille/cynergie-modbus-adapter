@@ -2,8 +2,8 @@
 	"inMemoryDB": false,
 	"interventionTime": "30 0 * * *",
 	"readFrequency": {
-		"interval": 15000,
-		"requiredOccurences": 5,
+		"interval": 5000,
+		"requiredOccurences": 1,
 		"scheduled": false
 	},
 	"controllers": [
@@ -13,12 +13,22 @@
 			"port": "502",
 			"slaveId": 1,
 			"registers": [
-				{"label": "Ia", "address": 154, "type": "INT16", "unit": "A", "coefficient": 1.0},
-				{"label": "Ib", "address": 155, "type": "INT16", "unit": "A", "coefficient": 1.0},
-				{"label": "Ic", "address": 156, "type": "INT16", "unit": "A", "coefficient": 1.0},
-				{"label": "Id", "address": 157, "type": "INT16", "unit": "A", "coefficient": 1.0},
-				{"label": "Ie", "address": 158, "type": "INT16", "unit": "A", "coefficient": 1.0},
-				{"label": "If", "address": 159, "type": "INT16", "unit": "A", "coefficient": 1.0}
+				{"label": "Vln_avg", "address": 171, "type": "UINT32", "unit": "V", "coefficient": 1},
+				{"label": "I_avg", "address": 154, "type": "UINT16", "unit": "A", "coefficient": 0.1},
+				{"label": "kW_tot", "address": 203, "type": "INT32", "unit": "kW", "coefficient": 1},
+				{"label": "Freq", "address": 158, "type": "UINT16", "unit": "Hz", "coefficient": 0.1}
+			]
+		},
+		{
+			"name": "DEMO",
+			"address": "127.0.0.1",
+			"port": "502",
+			"slaveId": 1,
+			"registers": [
+				{"label": "Vln_avg", "address": 171, "type": "UINT32", "unit": "V", "coefficient": 1},
+				{"label": "I_avg", "address": 154, "type": "UINT16", "unit": "A", "coefficient": 0.1},
+				{"label": "kW_tot", "address": 203, "type": "INT32", "unit": "kW", "coefficient": 1},
+				{"label": "Freq", "address": 158, "type": "UINT16", "unit": "Hz", "coefficient": 0.1}
 			]
 		}
 	]
