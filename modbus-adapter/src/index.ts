@@ -14,35 +14,31 @@ const express = require('express');
 const cluster = require('cluster');
 const server = express();
 const register = require('../node_modules/prom-client').register;
-
-//creating gauge pour prometheus metric
 const Gauge = require('../node_modules/prom-client').Gauge;
 
-// const g = new Gauge({
-// 	name: 'voltage_gauge',
-// 	help: 'Exemple voltage gauge',
-// 	labelNames: ['unit', 'Batiment']
-// });
-
+//create controllers 
 const controllers = createControllers(config.controllers);
+
+//create gauge for each controller and register 
 for (const c of controllers) {
 	for (const r of c.registers) {
 		r.gauge = new Gauge({
 			name: c.name + "_" + r.label,
-			help: 'Exemple voltage gauge', // todo
-			labelNames: ['unit', 'Batiment']
+			help: 'Electrecite ETS', 
+			labelNames: ['unit', 'parameter']
 		});
 	}
 }
 
 
+/// show the tha the debug monde started
 const args = process.argv.slice(2);
 const debugMode = args.length === 1;
 if (debugMode) {
 	console.warn('Debug mode enabled!');
 }
-
 console.log(`Service started (frq: ${config.readFrequency.interval}ms, occ: ${config.readFrequency.requiredOccurences})!`);
+
 
 // Declare the functions used to retrieve data from each controllers
 const ChosenProvider = debugMode ? FakeProvider : ModBusProvider;
@@ -75,16 +71,15 @@ const controllerFetching = controllers.map(c => {
 });
 
 
-// At each call, we will run the controller fetching operation and save it to DB every required interval
+//set the labels and the value for each gauge (register)
 const fetchFunction = () => {
-	// For each controller, store dataset obtained into a buffer
 	console.log('[' + new Date().toISOString() + '] fetch');
 	controllerFetching.forEach((fetch, index) => {
 		fetch()
 			.then(dataset => {
 					dataset.data.forEach(d => {
 						const r = d.register;
-						r.gauge.set({ unit: r.unit, Batiment: r.label }, d.data);
+						r.gauge.set({ unit: r.unit, parameter: r.label }, d.data);
 					});
 			})
 			.catch(reason => console.error(reason));
@@ -99,8 +94,6 @@ else {
 	fetchFunction();
 	setInterval(fetchFunction, config.readFrequency.interval);
 }
-
-
 
 //expose metrics
 server.get('/metrics', (req, res) => {
