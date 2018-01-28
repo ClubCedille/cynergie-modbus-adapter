@@ -1,4 +1,5 @@
 import { SupportedType, TypeBufferHelper } from '../helpers/TypeBufferHelper';
+const Gauge = require('prom-client').Gauge;
 
 /** One native register is 2 bytes */
 export const REGISTER_LENGTH = 16;
@@ -19,6 +20,7 @@ export class Register {
 	private _type: SupportedType;
 	private _unit: string;
 	private _coefficient: number;
+	private _gauge: any;
 
 	/** Label of the register */
 	get label(): string { return this._label; }
@@ -37,6 +39,9 @@ export class Register {
 
 	/** Coefficient to apply after reading */
 	get coefficient(): number { return this._coefficient; }
+
+	get gauge(): any { return this._gauge; }
+	set gauge(value: any) { this._gauge = value; }
 
 	constructor(conf: RegisterConfiguration) {
 		this._label = conf.label;

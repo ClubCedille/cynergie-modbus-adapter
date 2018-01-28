@@ -17,16 +17,17 @@ const register = require('../node_modules/prom-client').register;
 
 //creating gauge pour prometheus metric
 const Gauge = require('../node_modules/prom-client').Gauge;
-const g = new Gauge({
-	name: 'voltage_gauge',
-	help: 'Exemple voltage gauge',
-	labelNames: ['unit', 'Batiment']
-});
+
+// const g = new Gauge({
+// 	name: 'voltage_gauge',
+// 	help: 'Exemple voltage gauge',
+// 	labelNames: ['unit', 'Batiment']
+// });
 
 const controllers = createControllers(config.controllers);
 for (const c of controllers) {
 	for (const r of c.registers) {
-		r["gauge"] = new Gauge({
+		r.gauge = new Gauge({
 			name: c.name + "_" + r.label,
 			help: 'Exemple voltage gauge', // todo
 			labelNames: ['unit', 'Batiment']

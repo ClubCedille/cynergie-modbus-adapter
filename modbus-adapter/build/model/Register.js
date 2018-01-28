@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const TypeBufferHelper_1 = require("../helpers/TypeBufferHelper");
+const Gauge = require('prom-client').Gauge;
 /** One native register is 2 bytes */
 exports.REGISTER_LENGTH = 16;
 class Register {
@@ -16,6 +17,8 @@ class Register {
     get unit() { return this._unit; }
     /** Coefficient to apply after reading */
     get coefficient() { return this._coefficient; }
+    get gauge() { return this._gauge; }
+    set gauge(value) { this._gauge = value; }
     constructor(conf) {
         this._label = conf.label;
         this._address = conf.address;
