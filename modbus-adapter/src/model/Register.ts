@@ -11,7 +11,7 @@ export interface RegisterConfiguration {
 	type: SupportedType;
 	unit: string;
 	coefficient: number;
-	gauge: any; // TODO as Gauge
+	gauge: any; 
 }
 
 export class Register {
@@ -40,7 +40,10 @@ export class Register {
 	/** Coefficient to apply after reading */
 	get coefficient(): number { return this._coefficient; }
 
+	// Gauge to send metrics to prometheus
 	get gauge(): any { return this._gauge; }
+
+	// set the value for the gauge 
 	set gauge(value: any) { this._gauge = value; }
 
 	constructor(conf: RegisterConfiguration) {
