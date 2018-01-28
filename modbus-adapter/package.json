@@ -4,10 +4,8 @@
   "description": "Reading registers from modbus at interval and storing them every specified occurence",
   "main": "build/index.js",
   "scripts": {
-    "install": "tsc",
-    "start": "npm-run-all --parallel start:*",
-    "start:web": "http-server reports",
-    "start:service": "node build/index.js",
+    "build": "tsc",
+    "start": "node build/index.js",
     "extract": "node build/extract.js",
     "test": "npm run test:lint && npm run test:code",
     "test:lint": "tslint src/**/*.ts test/**/*.ts || true",
@@ -31,7 +29,7 @@
     "node-schedule": "^1.2.1",
     "npm-run-all": "^4.0.2",
     "sqlite3": "^3.1.8",
-    "prom-client":"^10.2.2"
+    "prom-client": "^10.2.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",

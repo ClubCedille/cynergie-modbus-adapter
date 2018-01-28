@@ -22,8 +22,9 @@ export class ModBusProvider extends BaseProvider {
 	}
 
 	/** Read the specified number of register from the address */
-	read(address: number, nbRegisters: number): Promise<ModbusRTU.ReadRegisterResult> {
-		return this._client.readHoldingRegisters(address, nbRegisters);
+	async read(address: number, nbRegisters: number): Promise<ModbusRTU.ReadRegisterResult> {
+		const data = await this._client.readHoldingRegisters(address, nbRegisters);
+		return data;
 	}
 
 	/** Close the connection */
