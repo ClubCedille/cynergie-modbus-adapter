@@ -17,7 +17,9 @@ class Register {
     get unit() { return this._unit; }
     /** Coefficient to apply after reading */
     get coefficient() { return this._coefficient; }
+    // Gauge to send metrics to prometheus
     get gauge() { return this._gauge; }
+    // set the value for the gauge 
     set gauge(value) { this._gauge = value; }
     constructor(conf) {
         this._label = conf.label;

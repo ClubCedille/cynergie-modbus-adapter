@@ -31,7 +31,6 @@ class ModBusProvider extends BaseProvider_1.BaseProvider {
     read(address, nbRegisters) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield this._client.readHoldingRegisters(address, nbRegisters);
-            console.log("R", address, nbRegisters, data);
             return data;
         });
     }

@@ -8,5 +8,5 @@ RUN apt-get install -y gnupg
 RUN bash nodesource_setup.sh
 RUN apt-get install -y nodejs 
 RUN cd adapteur && npm install && npm run build
-CMD cd adapteur && npm run start:service 
+CMD cd adapteur && npm run start
  

@@ -2,14 +2,14 @@
 	"inMemoryDB": false,
 	"interventionTime": "30 0 * * *",
 	"readFrequency": {
-		"interval": 5000,
+		"interval": 15000,
 		"requiredOccurences": 1,
 		"scheduled": false
 	},
 	"controllers": [
 		{
 			"name": "DEMO",
-			"address": "127.0.0.1",
+			"address": "",
 			"port": "502",
 			"slaveId": 1,
 			"registers": [
@@ -20,14 +20,12 @@
 			]
 		},
 		{
-			"name": "DEMO",
-			"address": "127.0.0.1",
+			"name": "DEMO2",
+			"address": "",
 			"port": "502",
 			"slaveId": 1,
 			"registers": [
 				{"label": "Vln_avg", "address": 171, "type": "UINT32", "unit": "V", "coefficient": 1},
-				{"label": "I_avg", "address": 154, "type": "UINT16", "unit": "A", "coefficient": 0.1},
-				{"label": "kW_tot", "address": 203, "type": "INT32", "unit": "kW", "coefficient": 1},
 				{"label": "Freq", "address": 158, "type": "UINT16", "unit": "Hz", "coefficient": 0.1}
 			]
 		}
