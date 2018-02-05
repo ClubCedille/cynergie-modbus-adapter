@@ -1,12 +1,7 @@
-FROM debian
+FROM yobasystems/alpine-nodejs:latest
 RUN mkdir adapteur
 ADD modbus-adapter adapteur
-RUN apt-get update 
-RUN apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-RUN apt-get install -y gnupg
-RUN bash nodesource_setup.sh
-RUN apt-get install -y nodejs 
 RUN cd adapteur && npm install && npm run build
 CMD cd adapteur && npm run start
+
  
