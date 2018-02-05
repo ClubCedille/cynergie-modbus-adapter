@@ -40,9 +40,8 @@ export class ReadingOperation {
 		this._registers.forEach(r => {
 			const readValue = TypeBufferHelper.read(r.type, buffer, bufferOffset);
 			values.push({
-				label: r.label,
-				data: r.convertValue(readValue),
-				unit: r.unit
+				register: r,
+				data: r.convertValue(readValue)
 			});
 
 			bufferOffset += TypeBufferHelper.getLength(r.type) / 8;

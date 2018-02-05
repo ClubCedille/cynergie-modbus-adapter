@@ -27,12 +27,6 @@
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
     }
   ],
   "annotations": {
@@ -54,11 +48,11 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": "10s",
+  "refresh": "1m",
   "rows": [
     {
       "collapse": false,
-      "height": "250px",
+      "height": 391,
       "panels": [
         {
           "aliasColors": {},
@@ -92,16 +86,24 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "voltage_gauge{job=\"cynergie\"}",
+              "expr": "DEMO2_Vln_avg{instance=\"localhost:3002\",job=\"cynergie\",parameter=\"Vln_avg\",unit=\"V\"}",
               "format": "time_series",
               "intervalFactor": 2,
+              "legendFormat": "Voltage_controlleur_1 (V)",
               "refId": "A"
+            },
+            {
+              "expr": "DEMO_Vln_avg{instance=\"localhost:3002\",job=\"cynergie\",parameter=\"Vln_avg\",unit=\"V\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Voltage_controlleur_2  (V)",
+              "refId": "B"
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
+          "timeFrom": null,
           "timeShift": null,
-          "title": "Voltage",
+          "title": "Voltages comparés",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -144,105 +146,26 @@
     },
     {
       "collapse": false,
-      "height": 264,
+      "height": 250,
       "panels": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#58140c"
-          ],
-          "datasource": "${DS_PROMETHEUS}",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": true,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 2,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 3,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "avg(voltage_gauge)",
-              "format": "time_series",
-              "instant": false,
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "thresholds": "75,90",
-          "timeFrom": null,
-          "title": "avr voltage",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
           "aliasColors": {},
-          "bars": true,
+          "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
-          "id": 3,
+          "id": 2,
           "legend": {
-            "alignAsTable": false,
-            "avg": true,
+            "avg": false,
             "current": false,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
-            "values": true
+            "values": false
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
@@ -252,79 +175,45 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 9,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "voltage_gauge{Batiment=\"Ia\"}",
+              "expr": "DEMO2_Freq{instance=\"localhost:3002\",job=\"cynergie\",parameter=\"Freq\",unit=\"Hz\"}",
               "format": "time_series",
-              "instant": false,
-              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"Ia\"}",
+              "legendFormat": "Fréquence_controlleur_1 (Hz)",
               "refId": "A"
             },
             {
-              "expr": "voltage_gauge{Batiment=\"Ib\"}",
+              "expr": "DEMO_Freq{instance=\"localhost:3002\",job=\"cynergie\",parameter=\"Freq\",unit=\"Hz\"}",
               "format": "time_series",
-              "instant": false,
-              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"Ib\"}",
+              "legendFormat": "Fréquence_controlleur_2 (Hz)",
               "refId": "B"
-            },
-            {
-              "expr": "voltage_gauge{Batiment=\"Ic\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"Ic\"}",
-              "refId": "C"
-            },
-            {
-              "expr": "voltage_gauge{Batiment=\"Id\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"Id\"}",
-              "refId": "D"
-            },
-            {
-              "expr": "voltage_gauge{Batiment=\"Ie\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"Ie\"}",
-              "refId": "E"
-            },
-            {
-              "expr": "voltage_gauge{Batiment=\"If\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{Batiment=\"If\"}",
-              "refId": "F"
             }
           ],
           "thresholds": [],
-          "timeFrom": "4m",
+          "timeFrom": null,
           "timeShift": null,
-          "title": "voltage bars",
+          "title": "Fréquences comparées",
           "tooltip": {
-            "shared": false,
+            "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
           "type": "graph",
           "xaxis": {
             "buckets": null,
-            "mode": "series",
+            "mode": "time",
             "name": null,
             "show": true,
-            "values": [
-              "total"
-            ]
+            "values": []
           },
           "yaxes": [
             {
-              "format": "s",
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -348,17 +237,6 @@
       "showTitle": false,
       "title": "Dashboard Row",
       "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
     }
   ],
   "schemaVersion": 14,
@@ -368,7 +246,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -397,6 +275,6 @@
     ]
   },
   "timezone": "",
-  "title": "dashboard cynergie",
+  "title": "Comparative_Queries",
   "version": 1
 }

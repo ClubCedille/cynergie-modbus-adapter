@@ -11,14 +11,20 @@ const express = require('express');
 const cluster = require('cluster');
 const server = express();
 const register = require('../node_modules/prom-client').register;
-//creating gauge pour prometheus metric
 const Gauge = require('../node_modules/prom-client').Gauge;
-const g = new Gauge({
-    name: 'voltage_gauge',
-    help: 'Exemple voltage gauge',
-    labelNames: ['unit', 'Batiment']
-});
+//create controllers 
 const controllers = ConfigHelper_1.createControllers(config.controllers);
+//create gauge for each controller and register 
+for (const c of controllers) {
+    for (const r of c.registers) {
+        r.gauge = new Gauge({
+            name: c.name + "_" + r.label,
+            help: 'Electrecite ETS',
+            labelNames: ['unit', 'parameter']
+        });
+    }
+}
+/// show the tha the debug monde started
 const args = process.argv.slice(2);
 const debugMode = args.length === 1;
 if (debugMode) {
@@ -34,7 +40,9 @@ const controllerFetching = controllers.map(c => {
         let promise = provider.connect();
         promise = promise.then(() => []);
         c.readings.forEach(r => {
-            promise = promise.then((v) => provider.read(r.address, r.nbRegisters).then(raw => { v.push(r.recompose(raw.buffer)); return v; }));
+            promise = promise
+                .then((v) => provider.read(r.address, r.nbRegisters)
+                .then(raw => { v.push(r.recompose(raw.buffer)); return v; }));
         });
         promise = promise.catch(err => console.error('Error encountered with controller fetching:', err));
         promise = promise.then(values => {
@@ -42,21 +50,22 @@ const controllerFetching = controllers.map(c => {
             return {
                 time: date,
                 name: c.name,
-                data: DatasetHelper_1.DatasetHelper.flatten(values)
+                data: DatasetHelper_1.DatasetHelper.flatten(values),
+                controller: c
             };
         });
         return promise;
     };
 });
-// At each call, we will run the controller fetching operation and save it to DB every required interval
+//set the labels and the value for each gauge (register)
 const fetchFunction = () => {
-    // For each controller, store dataset obtained into a buffer
     console.log('[' + new Date().toISOString() + '] fetch');
     controllerFetching.forEach((fetch, index) => {
         fetch()
             .then(dataset => {
             dataset.data.forEach(d => {
-                g.set({ unit: d.unit, Batiment: d.label }, d.data);
+                const r = d.register;
+                r.gauge.set({ unit: r.unit, parameter: r.label }, d.data);
             });
         })
             .catch(reason => console.error(reason));
@@ -75,5 +84,5 @@ server.get('/metrics', (req, res) => {
     res.set('Content-Type', register.contentType);
     res.end(register.metrics());
 });
-console.log('Server listening to 3000, metrics exposed on /metrics endpoint');
-server.listen(3000);
+console.log('Server listening to 3002, metrics exposed on /metrics endpoint');
+server.listen(3002);
