@@ -2,7 +2,7 @@
 
 ### Usage
 - need docker and docker-compose to work
-- change path for dashboards in `grafana/grafana.ini`
+- add controllers IP adresse
 - start   with  `docker-compose up`
 - the metrics are in http://localhost:3002/metrics
 - prometheus is in http://localhost:9090
