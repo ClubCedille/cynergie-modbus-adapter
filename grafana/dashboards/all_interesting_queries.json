@@ -42,6 +42,7 @@
       }
     ]
   },
+  "description": "Données des contrôleurs de TEST",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -586,7 +587,7 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "all_test_queries",
-  "version": 1
+  "timezone": "browser",
+  "title": "Cynergie-TEST",
+  "version": 2
 }
