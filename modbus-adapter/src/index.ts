@@ -24,10 +24,6 @@ reader.addValueListener(v => {
 		unit: v.valueItem.unit,
 		parameter: v.valueItem.label
 	}, v.data, v.time);
-	console.log({
-		unit: v.valueItem.unit,
-		parameter: v.valueItem.label
-	}, v.data, v.time);
 });
 
 reader.start();
