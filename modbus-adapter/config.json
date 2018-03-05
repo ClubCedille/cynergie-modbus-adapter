@@ -2,7 +2,7 @@
 	"controllers": [
 		{
 			"name": "DEMO",
-			"address": "",
+			"address": "10.148.105.7",
 			"port": "502",
 			"slaveId": 1,
 			"valueItemInfos": [
@@ -14,7 +14,7 @@
 		},
 		{
 			"name": "DEMO2",
-			"address": "",
+			"address": "10.148.105.8",
 			"port": "502",
 			"slaveId": 1,
 			"valueItemInfos": [

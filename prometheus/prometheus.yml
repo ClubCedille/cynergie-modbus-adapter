@@ -12,8 +12,8 @@ scrape_configs:
 
   - job_name: 'cynergie'
 
-    # Override the global default and scrape targets from this job every 1m .
-    scrape_interval: 1m
+    # Override the global default and scrape targets from this job every 2s .
+    scrape_interval: 2s
 
     static_configs:
          - targets: ['localhost:3002']
