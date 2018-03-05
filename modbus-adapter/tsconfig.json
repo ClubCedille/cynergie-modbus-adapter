@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "strict": false,
+    "strict": true,
     "typeRoots": ["node_modules/@types"],
     "sourceMap": false,
     "outDir": "build"
