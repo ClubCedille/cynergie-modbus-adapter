@@ -23,7 +23,7 @@ reader.addValueListener(v => {
 	gauge.set({
 		unit: v.valueItem.unit,
 		parameter: v.valueItem.label
-	}, v.data, v.time);
+	}, v.data);
 });
 
 reader.start();
@@ -36,5 +36,5 @@ server.get('/metrics', (req, res) => {
 	res.end(register.metrics());
 });
 
-console.log('Server listening to 3000, metrics exposed on /metrics endpoint');
-server.listen(3000);
+console.log('Server listening to 3002, metrics exposed on /metrics endpoint');
+server.listen(3002);

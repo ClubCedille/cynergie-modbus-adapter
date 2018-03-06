@@ -6,8 +6,6 @@ volumes:
     grafana_data: {}
 
 
-
-
 services:
 
   #TSDB
@@ -39,7 +37,7 @@ services:
 
   #used to show graphics
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:5.0.0
     depends_on:
       - prometheus
     ports:
