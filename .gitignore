@@ -1,3 +1,2 @@
-prom-client
-node_modules
-config.json
+modbus-adapter/config.json
+modbus-adapter/node_modules
