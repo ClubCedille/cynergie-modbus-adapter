@@ -1,12 +1,8 @@
 #my global config
-#global:
-  #scrape_interval:     10s # By default, scrape targets every 10 seconds.
+global:
+  scrape_interval: 5s # By default, scrape targets every 5 seconds.
+  evaluation_interval: 5s # By default, scrape targets every 5 seconds.
 
-
-
-
-# scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
 
@@ -18,4 +14,20 @@ scrape_configs:
     static_configs:
          - targets: ['localhost:3002']
 
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+         - targets: ['localhost:9090']
+
+
+  - job_name: 'cadvisor'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+         - targets: ['localhost:8080']
 

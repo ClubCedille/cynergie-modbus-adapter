@@ -1,10 +1,8 @@
 version: '3'
 
-
 volumes:
     prometheus_data: {}
     grafana_data: {}
-
 
 services:
 
@@ -50,5 +48,18 @@ services:
     command:
       - '--config=/etc/grafana/grafana.ini'
     network_mode: "host"
+
+  #get data information about the prometheus storage
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8080:8080
+    network_mode: "host"
+
 
 
