@@ -1,8 +1,8 @@
-#Cynergie adapter with Prometheus and Grafana
+# Cynergie adapter with Prometheus and Grafana
 
 ### Usage
 - need docker and docker-compose to work
-- create config file in the modbus-adapter directory `config.json` and add controllers IP adresse in it , Example :
+- create a config file in the modbus-adapter directory `config.json` and add controllers IP adresse in it, example :
 
 ```
 {
