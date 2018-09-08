@@ -1,43 +1,17 @@
-# Cynergie adapter with Prometheus and Grafana
+# Cynergie adapter 
 
-### Usage
-- need docker and docker-compose to work
-- create a config file in the modbus-adapter directory `config.json` and add controllers IP adresse in it, example :
+![](http://cedille.etsmtl.ca/img/portfolio/cynergie-project.jpg)
 
-```
-{
-	"controllers": [
-		{
-			"name": "DEMO",
-			"address": "",
-			"port": "502",
-			"slaveId": 1,
-			"valueItemInfos": [
-				{"label": "Vln_avg", "address": 171, "type": "UINT32", "unit": "V", "coefficient": 1, "recurrence": "*/5 * * * * *"},
-				{"label": "I_avg", "address": 154, "type": "UINT16", "unit": "A", "coefficient": 0.1, "recurrence": "*/5 * * * * *"},
-				{"label": "kW_tot", "address": 203, "type": "INT32", "unit": "kW", "coefficient": 1, "recurrence": "*/5 * * * * *"},
-				{"label": "Freq", "address": 158, "type": "UINT16", "unit": "Hz", "coefficient": 0.1, "recurrence": "*/5 * * * * *"}
-			]
-		},
-		{
-			"name": "DEMO2",
-			"address": "",
-			"port": "502",
-			"slaveId": 1,
-			"valueItemInfos": [
-				{"label": "Vln_avg", "address": 171, "type": "UINT32", "unit": "V", "coefficient": 1, "recurrence": "*/5 * * * * *"},
-				{"label": "Freq", "address": 158, "type": "UINT16", "unit": "Hz", "coefficient": 0.1, "recurrence": "*/5 * * * * *"}
-			]
-		}
-	]
-}
+## Usage
+- Dans le dossier modbus-adapter `mv config.exemple.json  config.json`
+- Ajouter les controlleurs avec leur addresse IP et leurs liste des [registres](https://github.com/ClubCedille/cynergie-modbus-adapter/tree/master/Doc/ION_Meter_Modbus.pdf).
+- Démarrer avec  `docker-compose up`
 
+Ports | APP
+------------ | -------------
+3002/metrics | les Données envoyés par le modbus-adapter 
+9090 | Prometheus DB
+3000 | Grafana
 
-```
-
-- start   with  `docker-compose up`
-	- Modbus metrics are in http://localhost:3002/metrics
-	- Prometheus is in http://localhost:9090
-	- Grafana is open  in http://localhost:3000 
-	- Cadvisor is open  in http://localhost:8080
+Pour plus d'infomation visitez le [wiki](https://github.com/ClubCedille/cynergie-modbus-adapter/wiki) où https://cynergie.cedille.club/
 
