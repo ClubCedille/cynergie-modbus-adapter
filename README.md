@@ -4,7 +4,7 @@
 
 ## Usage
 - Dans le dossier modbus-adapter `mv config.exemple.json  config.json`
-- Ajouter les controlleurs avec leur addresse IP et leurs liste des [registres](https://github.com/ClubCedille/cynergie-modbus-adapter/tree/master/Doc/ION_Meter_Modbus.pdf).
+- Ajouter les controlleurs avec leur addresse IP et leurs liste des [registres](https://github.com/ClubCedille/cynergie-modbus-adapter/tree/master/doc/ION_Meter_Modbus.pdf).
 - Démarrer avec  `docker-compose up`
 
 Ports | APP
